@@ -13,6 +13,7 @@ namespace The_Loners_Project
 
             Console.WriteLine("bo is een fucking twat");
             Console.ReadLine();
+            Console.ReadLine();
 
             // test
         }
