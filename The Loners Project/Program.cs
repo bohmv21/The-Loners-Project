@@ -10,6 +10,10 @@ namespace The_Loners_Project
     {
         static void Main(string[] args)
         {
+
+            Console.WriteLine("jules is a cunt");
+            Console.ReadLine();
+            // test
         }
     }
 }
