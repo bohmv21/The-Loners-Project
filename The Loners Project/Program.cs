@@ -11,7 +11,7 @@ namespace The_Loners_Project
         static void Main(string[] args)
         {
 
-            Console.WriteLine("bo is een fucking twat");
+            Console.WriteLine("bo & juul is een fucking twat");
             Console.ReadLine();
             Console.ReadLine();
 
