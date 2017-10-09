@@ -12,6 +12,14 @@ namespace Escape_room
     {
         static void Main(string[] args)
         {
+            Intro();
+            Console.ReadLine();
+        }
+
+
+
+        static void Intro()
+        {
             string IntroText = "Welcome to the escape room";
             var varIntroText = "";
             for (int i = 0; i < IntroText.Length; i++)
@@ -34,18 +42,28 @@ namespace Escape_room
                 Thread.Sleep(50);
             }
 
-            string IntroKeyWords = "Inspect";
-            var varIntroKeyWords = "";
-            for (int i = 0; i < IntroKeyWords.Length; i++)
+            string KeyWordInspect = "Inspect";
+            var varKeyWordInspect = "";
+            for (int i = 0; i < KeyWordInspect.Length; i++)
             {
-                varIntroKeyWords += IntroKeyWords[i];
+                varKeyWordInspect += KeyWordInspect[i];
                 Console.Clear();
                 Console.WriteLine(IntroRules);
-                Console.WriteLine(varIntroKeyWords);
+                Console.WriteLine(varKeyWordInspect);
                 Thread.Sleep(50);
             }
-            Console.ReadLine();
-            Console.WriteLine("");
+
+            string KeyWordSearch = "Search";
+            var varKeyWordSearch = "";
+            for (int i = 0; i < KeyWordSearch.Length; i++)
+            {
+                varKeyWordSearch += KeyWordSearch[i];
+                Console.Clear();
+                Console.WriteLine(IntroRules);
+                Console.WriteLine(varKeyWordInspect);
+                Console.WriteLine(varKeyWordSearch);
+                Thread.Sleep(50);
+            }
         }
     }
 }
