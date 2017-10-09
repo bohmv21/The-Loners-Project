@@ -13,8 +13,8 @@ namespace Escape_room
         static void Main(string[] args)
         {
             Intro();
-
             Console.ReadLine();
+
         }
 
     
@@ -53,92 +53,57 @@ namespace Escape_room
         static void Intro()
         {
             string IntroText = "Welcome to the escape room";
-            var varIntroText = "";
             for (int i = 0; i < IntroText.Length; i++)
             {
-                varIntroText += IntroText[i];
-                Console.Clear();
-                Console.WriteLine(varIntroText);
+                Console.Write(IntroText[i]);
                 Thread.Sleep(50);
             }
             Thread.Sleep(1000);
+            Console.Clear();
 
 
-            string IntroRules = "There are some keywords u will need to use for this escape room :";
-            var varIntroRules = "";
+            string IntroRules = "There are some keywords u will need to use for this escape room : " + "\r\n";
             for (int i = 0; i < IntroRules.Length; i++)
             {
-                varIntroRules += IntroRules[i];
-                Console.Clear();
-                Console.WriteLine(varIntroRules);
+                Console.Write(IntroRules[i]);
                 Thread.Sleep(50);
             }
+            
 
-            string KeyWordInspect = "Inspect";
-            var varKeyWordInspect = "";
+            string KeyWordInspect = "Inspect" + "\r\n";
             for (int i = 0; i < KeyWordInspect.Length; i++)
             {
-                varKeyWordInspect += KeyWordInspect[i];
-                Console.Clear();
-                Console.WriteLine(IntroRules);
-                Console.WriteLine(varKeyWordInspect);
+                Console.Write(KeyWordInspect[i]);
                 Thread.Sleep(50);
             }
-
-            string KeyWordSearch = "Search";
-            var varKeyWordSearch = "";
+            
+            string KeyWordSearch = "Search" + "\r\n";
             for (int i = 0; i < KeyWordSearch.Length; i++)
             {
-                varKeyWordSearch += KeyWordSearch[i];
-                Console.Clear();
-                Console.WriteLine(IntroRules);
-                Console.WriteLine(varKeyWordInspect);
-                Console.WriteLine(varKeyWordSearch);
+                Console.Write(KeyWordSearch[i]);
                 Thread.Sleep(50);
             }
 
-            string KeyWordUse = "Use";
-            var varKeyWordUse = "";
+            string KeyWordUse = "Use" + "\r\n";
             for (int i = 0; i < KeyWordUse.Length; i++)
             {
-                varKeyWordUse += KeyWordUse[i];
-                Console.Clear();
-                Console.WriteLine(IntroRules);
-                Console.WriteLine(varKeyWordInspect);
-                Console.WriteLine(varKeyWordSearch);
-                Console.WriteLine(varKeyWordUse);
+                Console.Write(KeyWordUse[i]);
                 Thread.Sleep(50);
             }
 
-            string KeyWordBack = "Back";
-            var varKeyWordBack = "";
+            string KeyWordBack = "Back" + "\r\n";
             for (int i = 0; i < KeyWordBack.Length; i++)
             {
-                varKeyWordBack += KeyWordBack[i];
-                Console.Clear();
-                Console.WriteLine(IntroRules);
-                Console.WriteLine(varKeyWordInspect);
-                Console.WriteLine(varKeyWordSearch);
-                Console.WriteLine(varKeyWordUse);
-                Console.WriteLine(varKeyWordBack);
+                Console.Write(KeyWordBack[i]);
                 Thread.Sleep(50);
             }
 
-            string KeyWordEnter = "Enter";
-            var varKeyWordEnter = "";
+            string KeyWordEnter = "Enter" + "\r\n";
             for (int i = 0; i < KeyWordEnter.Length; i++)
             {
-                varKeyWordEnter += KeyWordEnter[i];
-                Console.Clear();
-                Console.WriteLine(IntroRules);
-                Console.WriteLine(varKeyWordInspect);
-                Console.WriteLine(varKeyWordSearch);
-                Console.WriteLine(varKeyWordUse);
-                Console.WriteLine(varKeyWordBack);
-                Console.WriteLine(varKeyWordEnter);
+                Console.Write(KeyWordEnter[i]);
                 Thread.Sleep(50);
             }
-
         }
     }
 }
