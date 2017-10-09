@@ -16,7 +16,38 @@ namespace Escape_room
             Console.ReadLine();
         }
 
+    
+        static void Kamer1()
+        {
+            string path = @"Data/";
+            string name = "kamer1.txt" ;
+            File.ReadAllLines(path + name);
+        }
+        static void Kamer2()
+        {
+            string path = @"Data/";
+            string name = "kamer2.txt";
+            File.ReadAllLines(path + name);
+        }
+        static void Kamer3()
+        {
+            string path = @"Data/";
+            string name = "kamer3.txt";
+            File.ReadAllLines(path + name);
+        }
+        static void Kamer4()
+        {
+            string path = @"Data/";
+            string name = "kamer4.txt";
+            File.ReadAllLines(path + name);
+        }
 
+        static void Inventory()
+        {
+            string path = @"Data/";
+            string name = "inventory.txt";
+            File.ReadAllLines(path + name);
+        }
 
         static void Intro()
         {
