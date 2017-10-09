@@ -13,6 +13,7 @@ namespace Escape_room
         static void Main(string[] args)
         {
             Intro();
+
             Console.ReadLine();
         }
 
