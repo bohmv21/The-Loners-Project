@@ -64,6 +64,33 @@ namespace Escape_room
                 Console.WriteLine(varKeyWordSearch);
                 Thread.Sleep(50);
             }
+
+            string KeyWordUse = "Use";
+            var varKeyWordUse = "";
+            for (int i = 0; i < KeyWordUse.Length; i++)
+            {
+                varKeyWordUse += KeyWordUse[i];
+                Console.Clear();
+                Console.WriteLine(IntroRules);
+                Console.WriteLine(varKeyWordInspect);
+                Console.WriteLine(varKeyWordSearch);
+                Console.WriteLine(varKeyWordUse);
+                Thread.Sleep(50);
+            }
+
+            string KeyWordBack = "Use";
+            var varKeyWordBack = "";
+            for (int i = 0; i < KeyWordBack.Length; i++)
+            {
+                varKeyWordBack += KeyWordBack[i];
+                Console.Clear();
+                Console.WriteLine(IntroRules);
+                Console.WriteLine(varKeyWordInspect);
+                Console.WriteLine(varKeyWordSearch);
+                Console.WriteLine(varKeyWordUse);
+                Console.WriteLine(varKeyWordBack);
+                Thread.Sleep(50);
+            }
         }
     }
 }
