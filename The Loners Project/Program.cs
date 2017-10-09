@@ -110,7 +110,7 @@ namespace Escape_room
                 Thread.Sleep(50);
             }
 
-            string KeyWordBack = "Use";
+            string KeyWordBack = "Back";
             var varKeyWordBack = "";
             for (int i = 0; i < KeyWordBack.Length; i++)
             {
@@ -123,6 +123,22 @@ namespace Escape_room
                 Console.WriteLine(varKeyWordBack);
                 Thread.Sleep(50);
             }
+
+            string KeyWordEnter = "Enter";
+            var varKeyWordEnter = "";
+            for (int i = 0; i < KeyWordEnter.Length; i++)
+            {
+                varKeyWordEnter += KeyWordEnter[i];
+                Console.Clear();
+                Console.WriteLine(IntroRules);
+                Console.WriteLine(varKeyWordInspect);
+                Console.WriteLine(varKeyWordSearch);
+                Console.WriteLine(varKeyWordUse);
+                Console.WriteLine(varKeyWordBack);
+                Console.WriteLine(varKeyWordEnter);
+                Thread.Sleep(50);
+            }
+
         }
     }
 }
