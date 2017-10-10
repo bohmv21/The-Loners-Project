@@ -12,18 +12,46 @@ namespace Escape_room
     {
         static void Main(string[] args)
         {
-            Intro();
+           Intro();
             Console.ReadLine();
+            Kamer1();
+            Mainswitch();
 
         }
+        static void Mainswitch()
+        {
+             int x = 1;
+            do
+            {
+                string Line = Convert.ToString(Console.ReadLine());
+                switch (Line.ToLower())
+                {
+                    case "inspect pillow":
+                        pillow();
+                        break;
+                    case "back":
+                        Kamer1();
+                        break;
 
-    
+                    default:
+                        Console.WriteLine("Plz enter help to look at functions"); 
+                        break;
+                }
+            } while (x == 1);
+        }
+
+
         static void Kamer1()
         {
             string path = @"Data/";
-            string name = "kamer1.txt" ;
-            File.ReadAllLines(path + name);
+            string name = "Kamer1.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+
         }
+
+
 
         static void Kamer2()
         {
@@ -44,6 +72,15 @@ namespace Escape_room
             string path = @"Data/";
             string name = "kamer4.txt";
             File.ReadAllLines(path + name);
+        }
+        static void pillow()
+        {
+            string path = @"Data/";
+            string name = "Pillow.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+
         }
 
         static void Inventory()
