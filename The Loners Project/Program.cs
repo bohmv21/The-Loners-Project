@@ -12,19 +12,19 @@ namespace Escape_room
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(150, 40);
             //huis();
-           // Console.ReadLine();
-
-           // Intro();
-            Kamer1();
+            Thread.Sleep(2000);
+            // Intro();
             Mainswitch();
-            
+
         }
 
 
         static void Mainswitch()
         {
-             int x = 1;
+            Kamer1();
+            int x = 1;
             do
             {
                 string Line = Convert.ToString(Console.ReadLine());
@@ -33,21 +33,118 @@ namespace Escape_room
                     case "inspect pillow":
                         pillow();
                         break;
-                    case "inspect body":
-                        body();
-                        break;
-                    case "search pocket":
-                        pocket();
-                        break;
+
                     case "back":
                         Kamer1();
                         break;
+
                     case "help":
                         help();
                         break;
 
+                    case "enter left door":
+                        Kamer2Switch();
+                        break;
+
+                    case "enter right door":
+                        Kamer3();
+                        break;
+
+                    case "":
+                        break;
+
                     default:
-                        Console.WriteLine("Please enter help to look at functions"); 
+                        Console.WriteLine("Please enter help to look at functions");
+                        break;
+                }
+            } while (x == 1);
+        }
+
+        static void Kamer2Switch()
+        {
+            Kamer2();
+            int x = 1;
+            do
+            {
+                string Line = Convert.ToString(Console.ReadLine());
+                switch (Line.ToLower())
+                {                   
+                    case "inspect body":
+                        body();
+                        Kamer2Switch2();
+                        break;
+
+                    case "back":
+                        x = 0;
+                        Kamer1();
+                        break;
+
+                    case "help":
+                        help();
+                        Kamer2();
+                        break;
+
+                    default:
+                        Console.WriteLine("Please enter help to look at functions");
+                        break;
+                }
+            } while (x == 1);
+        }
+
+        static void Kamer2Switch2()
+        {
+            int x = 1;
+            do
+            {
+                string Line = Convert.ToString(Console.ReadLine());
+                switch (Line.ToLower())
+                {
+                    case "search pocket":
+                        pocket();
+                        break;
+
+                    case "back":
+                        x = 0;
+                        Kamer2();
+                        break;
+
+                    case "help":
+                        x = 0;
+                        help();
+                        Kamer2();
+                        break;
+
+                    default:
+                        Console.WriteLine("Please enter help to look at functions");
+                        break;
+                }
+            } while (x == 1);
+        }
+
+        static void Kamer3Switch()
+        {
+            Kamer3();
+            int x = 1;
+            do
+            {
+                string Line = Convert.ToString(Console.ReadLine());
+                switch (Line.ToLower())
+                {
+                    case "inspect":
+                        break;
+
+                    case "back":
+                        x = 0;
+                        Kamer1();
+                        break;
+
+                    case "help":
+                        help();
+                        Kamer3();
+                        break;
+
+                    default:
+                        Console.WriteLine("Please enter help to look at functions");
                         break;
                 }
             } while (x == 1);
@@ -66,24 +163,28 @@ namespace Escape_room
         {
             string path = @"Data/";
             string name = "Kamer1.txt";
-            string zoom = File.ReadAllText(path + name);
+            string room = File.ReadAllText(path + name);
             Console.Clear();
-            Console.Write(zoom);
+            Console.Write(room);
 
         }
 
         static void Kamer2()
         {
             string path = @"Data/";
-            string name = "kamer2.txt";
-            File.ReadAllLines(path + name);
+            string name = "Kamer2.txt";
+            string room = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(room);
         }
 
         static void Kamer3()
         {
             string path = @"Data/";
-            string name = "kamer3.txt";
-            File.ReadAllLines(path + name);
+            string name = "Kamer3.txt";
+            string room = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(room);
         }
 
         static void Kamer4()
@@ -92,6 +193,7 @@ namespace Escape_room
             string name = "kamer4.txt";
             File.ReadAllLines(path + name);
         }
+
         static void pillow()
         {
             string path = @"Data/";
@@ -102,13 +204,13 @@ namespace Escape_room
             string Line;
             do
             {
-               Line = Convert.ToString(Console.ReadLine());
+                Line = Convert.ToString(Console.ReadLine());
 
                 if (Line.ToLower() == "search pillow")
                 {
                     note();
                 }
-            }while(Line != "back");
+            } while (Line != "back");
         }
 
         static void body()
@@ -156,7 +258,7 @@ namespace Escape_room
                 Console.Write(IntroRules[i]);
                 Thread.Sleep(50);
             }
-            
+
 
             string KeyWordInspect = "Inspect" + "\r\n";
             for (int i = 0; i < KeyWordInspect.Length; i++)
@@ -164,7 +266,7 @@ namespace Escape_room
                 Console.Write(KeyWordInspect[i]);
                 Thread.Sleep(50);
             }
-            
+
             string KeyWordSearch = "Search" + "\r\n";
             for (int i = 0; i < KeyWordSearch.Length; i++)
             {
@@ -193,7 +295,7 @@ namespace Escape_room
                 Thread.Sleep(50);
             }
         }
-        
+
         static void help()
         {
             Console.Clear();
@@ -239,13 +341,17 @@ namespace Escape_room
                 Thread.Sleep(50);
             }
 
-            string back = "type back to go back";
+            string back = "Press 'ENTER' to continue";
             for (int i = 0; i < back.Length; i++)
             {
                 Console.Write(back[i]);
                 Thread.Sleep(50);
             }
 
+            do
+            {
+            }
+            while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter));
         }
 
         static void note()
@@ -256,7 +362,5 @@ namespace Escape_room
             Console.Clear();
             Console.Write(zoom);
         }
-
-        static void 
     }
 }
