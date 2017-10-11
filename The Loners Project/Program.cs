@@ -32,6 +32,7 @@ namespace Escape_room
                 {
                     case "inspect pillow":
                         pillow();
+                        Mainswitch2();
                         break;
 
                     case "back":
@@ -51,6 +52,38 @@ namespace Escape_room
                         break;
 
                     case "":
+                        break;
+
+                    default:
+                        Console.WriteLine("Please enter help to look at functions");
+                        break;
+                }
+            } while (x == 1);
+        }
+
+        static void Mainswitch2()
+        {
+            Kamer1();
+            int x = 1;
+            do
+            {
+                string Line = Convert.ToString(Console.ReadLine());
+                switch (Line.ToLower())
+                {
+                    case "search pillow":
+                        note();
+                        break;
+
+                    case "back":
+                        x = 0;
+                        Kamer1();
+                        break;
+
+                    case "help":
+                        help();
+                        break;
+
+                    case "gsdg":
                         break;
 
                     default:
@@ -201,16 +234,6 @@ namespace Escape_room
             string zoom = File.ReadAllText(path + name);
             Console.Clear();
             Console.Write(zoom);
-            string Line;
-            do
-            {
-                Line = Convert.ToString(Console.ReadLine());
-
-                if (Line.ToLower() == "search pillow")
-                {
-                    note();
-                }
-            } while (Line != "back");
         }
 
         static void body()
