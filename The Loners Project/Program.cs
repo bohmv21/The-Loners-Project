@@ -12,12 +12,16 @@ namespace Escape_room
     {
         static void Main(string[] args)
         {
-           Intro();
-            Console.ReadLine();
+            //huis();
+           // Console.ReadLine();
+
+           // Intro();
             Kamer1();
             Mainswitch();
-
+            
         }
+
+
         static void Mainswitch()
         {
              int x = 1;
@@ -29,17 +33,34 @@ namespace Escape_room
                     case "inspect pillow":
                         pillow();
                         break;
+                    case "inspect body":
+                        body();
+                        break;
+                    case "search pocket":
+                        pocket();
+                        break;
                     case "back":
                         Kamer1();
                         break;
+                    case "help":
+                        help();
+                        break;
 
                     default:
-                        Console.WriteLine("Plz enter help to look at functions"); 
+                        Console.WriteLine("Please enter help to look at functions"); 
                         break;
                 }
             } while (x == 1);
         }
 
+        static void huis()
+        {
+            string path = @"Data/";
+            string name = "landhuis.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+        }
 
         static void Kamer1()
         {
@@ -50,8 +71,6 @@ namespace Escape_room
             Console.Write(zoom);
 
         }
-
-
 
         static void Kamer2()
         {
@@ -80,7 +99,35 @@ namespace Escape_room
             string zoom = File.ReadAllText(path + name);
             Console.Clear();
             Console.Write(zoom);
+            string Line;
+            do
+            {
+               Line = Convert.ToString(Console.ReadLine());
 
+                if (Line.ToLower() == "search pillow")
+                {
+                    note();
+                }
+            }while(Line != "back");
+        }
+
+        static void body()
+        {
+            string path = @"Data/";
+            string name = "pocket.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+
+        }
+
+        static void pocket()
+        {
+            string path = @"Data/";
+            string name = "idandbadge.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
         }
 
         static void Inventory()
@@ -92,6 +139,7 @@ namespace Escape_room
 
         static void Intro()
         {
+            Console.Clear();
             string IntroText = "Welcome to the escape room";
             for (int i = 0; i < IntroText.Length; i++)
             {
@@ -145,5 +193,70 @@ namespace Escape_room
                 Thread.Sleep(50);
             }
         }
+        
+        static void help()
+        {
+            Console.Clear();
+
+            string title = "These are all the available commands" + "\r\n";
+            for (int i = 0; i < title.Length; i++)
+            {
+                Console.Write(title[i]);
+                Thread.Sleep(50);
+            }
+            string KeyWordInspect = "Inspect" + "\r\n";
+            for (int i = 0; i < KeyWordInspect.Length; i++)
+            {
+                Console.Write(KeyWordInspect[i]);
+                Thread.Sleep(50);
+            }
+
+            string KeyWordSearch = "Search" + "\r\n";
+            for (int i = 0; i < KeyWordSearch.Length; i++)
+            {
+                Console.Write(KeyWordSearch[i]);
+                Thread.Sleep(50);
+            }
+
+            string KeyWordUse = "Use" + "\r\n";
+            for (int i = 0; i < KeyWordUse.Length; i++)
+            {
+                Console.Write(KeyWordUse[i]);
+                Thread.Sleep(50);
+            }
+
+            string KeyWordBack = "Back" + "\r\n";
+            for (int i = 0; i < KeyWordBack.Length; i++)
+            {
+                Console.Write(KeyWordBack[i]);
+                Thread.Sleep(50);
+            }
+
+            string KeyWordEnter = "Enter" + "\r\n";
+            for (int i = 0; i < KeyWordEnter.Length; i++)
+            {
+                Console.Write(KeyWordEnter[i]);
+                Thread.Sleep(50);
+            }
+
+            string back = "type back to go back";
+            for (int i = 0; i < back.Length; i++)
+            {
+                Console.Write(back[i]);
+                Thread.Sleep(50);
+            }
+
+        }
+
+        static void note()
+        {
+            string path = @"Data/";
+            string name = "briefje1.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+        }
+
+        static void 
     }
 }
