@@ -19,7 +19,7 @@ namespace Escape_room
             Mainswitch();
 
         }
-
+         
 
         static void Mainswitch()
         {
