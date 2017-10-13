@@ -41,6 +41,7 @@ namespace Escape_room
 
                     case "help":
                         help();
+                        Kamer1();
                         break;
 
                     case "enter left door":
@@ -49,9 +50,6 @@ namespace Escape_room
 
                     case "enter right door":
                         Kamer3();
-                        break;
-
-                    case "":
                         break;
 
                     default:
@@ -63,7 +61,6 @@ namespace Escape_room
 
         static void Mainswitch2()
         {
-            Kamer1();
             int x = 1;
             do
             {
@@ -81,6 +78,7 @@ namespace Escape_room
 
                     case "help":
                         help();
+                        Kamer1();
                         break;
 
                     case "gsdg":
