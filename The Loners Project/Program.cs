@@ -5,19 +5,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
+using System.Collections;
 
 namespace Escape_room
 {
     class Program
     {
+        public static SortedList<string, bool> ListInventory = new SortedList<string, bool>();
+        
+        
         static void Main(string[] args)
         {
+            ListInventory.Add("note", false);
+            ListInventory.Add("flaslight", false);
+            ListInventory.Add("", false);
+            ListInventory.Add("", false);
+            ListInventory.Add("", false);
+            ListInventory.Add("", false);
+
+
             Console.SetWindowSize(150, 40);
             //huis();
             Thread.Sleep(2000);
             // Intro();
             Mainswitch();
-
         }
          
 
@@ -67,8 +78,9 @@ namespace Escape_room
                 string Line = Convert.ToString(Console.ReadLine());
                 switch (Line.ToLower())
                 {
-                    case "search pillow":
+                    case "search pillow":   
                         note();
+                        ListInventory.Add("note", true);
                         break;
 
                     case "back":
@@ -81,8 +93,6 @@ namespace Escape_room
                         Kamer1();
                         break;
 
-                    case "gsdg":
-                        break;
 
                     default:
                         Console.WriteLine("Please enter help to look at functions");
