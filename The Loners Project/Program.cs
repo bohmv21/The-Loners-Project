@@ -12,16 +12,19 @@ namespace Escape_room
     class Program
     {
         public static SortedList<string, bool> ListInventory = new SortedList<string, bool>();
-        
-        
+
+
         static void Main(string[] args)
         {
-            ListInventory.Add("note", false);
-            ListInventory.Add("flaslight", false);
+
+            ListInventory.Add("note ", false);
+            ListInventory.Add("flaslight ", false);
             ListInventory.Add("", false);
+
+            /*ListInventory.Add("", false);
             ListInventory.Add("", false);
-            ListInventory.Add("", false);
-            ListInventory.Add("", false);
+            ListInventory.Add("", false); */
+            
 
 
             Console.SetWindowSize(150, 40);
@@ -66,6 +69,7 @@ namespace Escape_room
                     default:
                         Console.WriteLine("Please enter help to look at functions");
                         break;
+
                 }
             } while (x == 1);
         }
@@ -73,6 +77,7 @@ namespace Escape_room
         static void Mainswitch2()
         {
             int x = 1;
+
             do
             {
                 string Line = Convert.ToString(Console.ReadLine());
@@ -80,7 +85,14 @@ namespace Escape_room
                 {
                     case "search pillow":   
                         note();
-                        ListInventory.Add("note", true);
+                        foreach (KeyValuePair<string, bool> kvp in ListInventory.ToList())
+                        {
+                            if (kvp.Key == "note ")
+                            {
+                                ListInventory[kvp.Key] = true;
+                            }
+                        }
+
                         break;
 
                     case "back":
@@ -98,6 +110,7 @@ namespace Escape_room
                         Console.WriteLine("Please enter help to look at functions");
                         break;
                 }
+
             } while (x == 1);
         }
 
@@ -207,7 +220,7 @@ namespace Escape_room
             string room = File.ReadAllText(path + name);
             Console.Clear();
             Console.Write(room);
-
+            InventroyUI();
         }
 
         static void Kamer2()
@@ -217,6 +230,8 @@ namespace Escape_room
             string room = File.ReadAllText(path + name);
             Console.Clear();
             Console.Write(room);
+            InventroyUI();
+
         }
 
         static void Kamer3()
@@ -226,6 +241,8 @@ namespace Escape_room
             string room = File.ReadAllText(path + name);
             Console.Clear();
             Console.Write(room);
+            InventroyUI();
+
         }
 
         static void Kamer4()
@@ -233,6 +250,8 @@ namespace Escape_room
             string path = @"Data/";
             string name = "kamer4.txt";
             File.ReadAllLines(path + name);
+            InventroyUI();
+
         }
 
         static void pillow()
@@ -261,13 +280,6 @@ namespace Escape_room
             string zoom = File.ReadAllText(path + name);
             Console.Clear();
             Console.Write(zoom);
-        }
-
-        static void Inventory()
-        {
-            string path = @"Data/";
-            string name = "inventory.txt";
-            File.ReadAllLines(path + name);
         }
 
         static void Intro()
@@ -392,6 +404,31 @@ namespace Escape_room
             string zoom = File.ReadAllText(path + name);
             Console.Clear();
             Console.Write(zoom);
+        }
+
+        static void InventroyUI()
+        {
+            string cunt = "";
+            foreach (KeyValuePair<string, bool> kvp in ListInventory)
+            {
+                if (kvp.Value)
+                {
+                    cunt = cunt + kvp.Key;
+                }
+            }
+
+            var CursorPos = Console.CursorTop;
+            Console.SetCursorPosition(0, CursorPos);
+            Console.Write("│                                                                                                    |\n");
+            Console.Write("│ Inventory:                                                                                         │\n");
+            Console.Write("│                                                                                                    │\n");
+            Console.Write("│                                                                                                    │\n");
+            Console.Write("│____________________________________________________________________________________________________|\n");
+
+            Console.SetCursorPosition(2, CursorPos + 2);
+            Console.Write(cunt);
+            Console.SetCursorPosition(0, CursorPos + 5);
+            
         }
     }
 }
