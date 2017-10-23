@@ -57,7 +57,12 @@ namespace Escape_room
                         help();
                         Kamer1();
                         break;
-
+                    case "use note":
+                        if (ListInventory["note "])
+                        {
+                            note();
+                        }
+                        break;
                     case "enter left door":
                         Kamer2Switch();
                         break;
