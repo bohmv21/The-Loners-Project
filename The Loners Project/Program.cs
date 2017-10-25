@@ -254,6 +254,22 @@ namespace Escape_room
 
         }
 
+        static void kamer5()
+        {
+            string path = @"Data/";
+            string name = "kamer5.txt";
+            File.ReadAllLines(path + name);
+            InventroyUI();
+        }
+
+        static void kamer6()
+        {
+            string path = @"Data/";
+            string name = "kamer6.txt";
+            File.ReadAllLines(path + name);
+            InventroyUI();
+        }
+
         static void pillow()
         {
             string path = @"Data/";
