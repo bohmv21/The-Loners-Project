@@ -73,6 +73,9 @@
     <Content Include="Data\kamer5lightsoff.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\kamer5lightson.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\kamer6.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

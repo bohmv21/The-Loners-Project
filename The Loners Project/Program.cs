@@ -150,6 +150,8 @@ namespace Escape_room
             } while (x == 1);
         }
 
+
+
         static void Kamer2Switch2()
         {
             int x = 1;
