@@ -28,9 +28,9 @@ namespace Escape_room
 
 
             Console.SetWindowSize(150, 40);
-            //huis();
+            huis();
             Thread.Sleep(2000);
-            // Intro();
+            Intro();
             Mainswitch();
         }
          
@@ -117,6 +117,48 @@ namespace Escape_room
                 }
 
             } while (x == 1);
+        }
+        
+        static void Mainswitch3()
+        {
+            int x = 1;
+
+            do
+            {
+                string Line = Convert.ToString(Console.ReadLine());
+                switch (Line.ToLower())
+                {
+                    case "inspect ghost":
+                        Console.Clear();
+                        string IntroText = "\n"+"";
+                        for (int i = 0; i < IntroText.Length; i++)
+                        {
+                            Console.Write(IntroText[i]);
+                            Thread.Sleep(50);
+                        }
+                        Thread.Sleep(1000);
+                        Console.Clear();
+
+                        break;
+
+                    case "back":
+                        x = 0;
+                        Kamer2();
+                        break;
+
+                    case "help":
+                        help();
+                        Kamer1();
+                        break;
+
+
+                    default:
+                        Console.WriteLine("Please enter help to look at functions");
+                        break;
+                }
+
+            } while (x == 1);
+
         }
 
         static void Kamer2Switch()
@@ -207,6 +249,8 @@ namespace Escape_room
                         break;
                 }
             } while (x == 1);
+
+
         }
 
         static void huis()
@@ -216,6 +260,13 @@ namespace Escape_room
             string zoom = File.ReadAllText(path + name);
             Console.Clear();
             Console.Write(zoom);
+
+            do
+            {
+
+            }
+            while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter));
+
         }
 
         static void Kamer1()
@@ -262,7 +313,15 @@ namespace Escape_room
         static void kamer5()
         {
             string path = @"Data/";
-            string name = "kamer5.txt";
+            string name = "kamer5lightsoff.txt";
+            File.ReadAllLines(path + name);
+            InventroyUI();
+        }
+
+        static void kamer5lightson()
+        {
+            string path = "@Date/";
+            string name = "kamer5lightson.txt";
             File.ReadAllLines(path + name);
             InventroyUI();
         }
@@ -422,6 +481,15 @@ namespace Escape_room
         {
             string path = @"Data/";
             string name = "briefje1.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+        }
+
+        static void gravestone()
+        {
+            string path = @"Date/";
+            string name = "gravstone.txt";
             string zoom = File.ReadAllText(path + name);
             Console.Clear();
             Console.Write(zoom);
