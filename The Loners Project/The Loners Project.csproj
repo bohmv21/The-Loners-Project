@@ -52,7 +52,7 @@
     <Content Include="Data\briefje1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\closet1.txt">
+    <Content Include="Data\closetOpen.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\gravestone.txt">

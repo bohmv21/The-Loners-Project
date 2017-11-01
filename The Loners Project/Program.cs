@@ -18,18 +18,16 @@ namespace Escape_room
         {
 
             ListInventory.Add("note ", false);
-            ListInventory.Add("flaslight ", false);
-            ListInventory.Add("", false);
-
-            /*ListInventory.Add("", false);
-            ListInventory.Add("", false);
-            ListInventory.Add("", false); */
-            
-
+            ListInventory.Add("old key ", false);
+            ListInventory.Add("rusty key ", false);
+            ListInventory.Add("rusty key ", false);
+            ListInventory.Add("id ", false);
+            ListInventory.Add("flashlight ", false);
+            ListInventory.Add("your moms toy ", false);
 
             Console.SetWindowSize(150, 40);
-           // huis();
-           // Intro();
+            //huis();
+            //Intro();
             Mainswitch();
         }
          
@@ -48,6 +46,11 @@ namespace Escape_room
                         Mainswitch2();
                         break;
 
+                    case "inspect cabinet":
+                        closetOpen();
+                        Mainswitch2();
+                        break;
+
                     case "back":
                         Kamer1();
                         break;
@@ -56,18 +59,21 @@ namespace Escape_room
                         help();
                         Kamer1();
                         break;
+
                     case "use note":
                         if (ListInventory["note "])
                         {
                             note();
                         }
                         break;
-                    case "enter left door":
-                        Kamer2Switch();
+                    case "use id":
+                        if (ListInventory["id "])
+                        {
+                            note();
+                        }
                         break;
-
-                    case "enter right door":
-                        Kamer3();
+                    case "enter door":
+                        Kamer2Switch();
                         break;
 
                     default:
@@ -96,53 +102,21 @@ namespace Escape_room
                                 ListInventory[kvp.Key] = true;
                             }
                         }
-
                         break;
-
-                    case "back":
-                        x = 0;
-                        Kamer1();
-                        break;
-
-                    case "help":
-                        help();
-                        Kamer1();
-                        break;
-
-
-                    default:
-                        Console.WriteLine("Please enter help to look at functions");
-                        break;
-                }
-
-            } while (x == 1);
-        }
-        
-        static void Mainswitch3()
-        {
-            int x = 1;
-
-            do
-            {
-                string Line = Convert.ToString(Console.ReadLine());
-                switch (Line.ToLower())
-                {
-                    case "inspect ghost":
-                        Console.Clear();
-                        string IntroText = "\n"+"";
-                        for (int i = 0; i < IntroText.Length; i++)
+                    case "search cabinet":
+                        note();
+                        foreach (KeyValuePair<string, bool> kvp in ListInventory.ToList())
                         {
-                            Console.Write(IntroText[i]);
-                            Thread.Sleep(50);
+                            if (kvp.Key == "old key ")
+                            {
+                                ListInventory[kvp.Key] = true;
+                            }
                         }
-                        Thread.Sleep(1000);
-                        Console.Clear();
-
                         break;
 
                     case "back":
                         x = 0;
-                        Kamer2();
+                        Kamer1();
                         break;
 
                     case "help":
@@ -157,9 +131,8 @@ namespace Escape_room
                 }
 
             } while (x == 1);
-
         }
-         
+
         static void Kamer2Switch()
         {
             Kamer2();
@@ -168,10 +141,40 @@ namespace Escape_room
             {
                 string Line = Convert.ToString(Console.ReadLine());
                 switch (Line.ToLower())
-                {                   
+                {
                     case "inspect body":
                         body();
                         Kamer2Switch2();
+                        break;
+
+                    case "use note":
+                        if (ListInventory["note "])
+                        {
+                            note();
+                        }
+                        break;
+                    case "use id":
+                        if (ListInventory["id "])
+                        {
+                            note();
+                        }
+                        break;
+
+                    case "enter right door":
+                        if(ListInventory["old key "])
+                        {
+                            Kamer4Switch();
+                        } else { Console.WriteLine("U need an old key to open this door"); }
+                        break;
+                    case "enter left door":
+                        if(ListInventory["rusty key "])
+                        {
+                            Kamer6Switch();
+                        }
+                        else { Console.WriteLine("U need a rusty key to open this door"); }
+                        break;
+                    case "enter hatch":
+                        Kamer3Switch();
                         break;
 
                     case "back":
@@ -201,6 +204,13 @@ namespace Escape_room
                 {
                     case "search pocket":
                         pocket();
+                        foreach (KeyValuePair<string, bool> kvp in ListInventory.ToList())
+                        {
+                            if (kvp.Key == "id ")
+                            {
+                                ListInventory[kvp.Key] = true;
+                            }
+                        }
                         break;
 
                     case "back":
@@ -233,9 +243,22 @@ namespace Escape_room
                     case "inspect":
                         break;
 
+                    case "use note":
+                        if (ListInventory["note "])
+                        {
+                            note();
+                        }
+                        break;
+                    case "use id":
+                        if (ListInventory["id "])
+                        {
+                            note();
+                        }
+                        break;
+
                     case "back":
                         x = 0;
-                        Kamer1();
+                        Kamer2Switch();
                         break;
 
                     case "help":
@@ -250,6 +273,147 @@ namespace Escape_room
             } while (x == 1);
 
 
+        }
+
+        static void Kamer4Switch()
+        {
+            Kamer4();
+            int x = 1;
+            do
+            {
+                string Line = Convert.ToString(Console.ReadLine());
+                switch (Line.ToLower())
+                {
+                    case "inspect pillow":
+                        break;
+
+                    case "back":
+                        x = 0;
+                        Kamer2Switch();
+                        break;
+
+                    case "help":
+                        help();
+                        Kamer4();
+                        break;
+                    case "use note":
+                        if (ListInventory["note "])
+                        {
+                            note();
+                        }
+                        break;
+                    case "use id":
+                        if (ListInventory["id "])
+                        {
+                            note();
+                        }
+                        break;
+                    case "enter door":
+                        break;
+
+                    default:
+                        Console.WriteLine("Please enter help to look at functions");
+                        break;
+
+                }
+            } while (x == 1);
+        }
+
+        static void Kamer5Switch()
+        {
+            Kamer5lightsoff();
+            int x = 1;
+            do
+            {
+                string Line = Convert.ToString(Console.ReadLine());
+                switch (Line.ToLower())
+                {
+                    case "inspect chest":
+                        foreach (KeyValuePair<string, bool> kvp in ListInventory.ToList())
+                        {
+                            if (kvp.Key == "rusty key ")
+                            {
+                                ListInventory[kvp.Key] = true;
+                            }
+                        }
+                        break;
+
+                    case "back":
+                        x = 0;
+                        Kamer2Switch();
+                        break;
+
+                    case "help":
+                        help();
+                        Kamer5lightsoff();
+                        break;
+                    case "use note":
+                        if (ListInventory["note "])
+                        {
+                            note();
+                        }
+                        break;
+                    case "use id":
+                        if (ListInventory["id "])
+                        {
+                            note();
+                        }
+                        break;
+                    case "enter door":
+                        break;
+
+                    default:
+                        Console.WriteLine("Please enter help to look at functions");
+                        break;
+
+                }
+            } while (x == 1);
+        }
+
+        static void Kamer6Switch()
+        {
+            Kamer6();
+            int x = 1;
+            do
+            {
+                string Line = Convert.ToString(Console.ReadLine());
+                switch (Line.ToLower())
+                {
+                    case "inspect pillow":
+                        pillow();
+                        Mainswitch2();
+                        break;
+
+                    case "back":
+                        x = 0;
+                        Kamer2Switch();
+                        break;
+
+                    case "help":
+                        help();
+                        Kamer6();
+                        break;
+                    case "use note":
+                        if (ListInventory["note "])
+                        {
+                            note();
+                        }
+                        break;
+                    case "use id":
+                        if (ListInventory["id "])
+                        {
+                            note();
+                        }
+                        break;
+                    case "enter door":
+                        break;
+
+                    default:
+                        Console.WriteLine("Please enter help to look at functions");
+                        break;
+
+                }
+            } while (x == 1);
         }
 
         static void huis()
@@ -297,40 +461,50 @@ namespace Escape_room
             Console.Clear();
             Console.Write(room);
             InventroyUI();
-
         }
 
         static void Kamer4()
         {
             string path = @"Data/";
             string name = "kamer4.txt";
-            File.ReadAllLines(path + name);
+            string room = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(room);
             InventroyUI();
 
         }
 
-        static void kamer5()
+        static void Kamer5lightsoff()
         {
             string path = @"Data/";
             string name = "kamer5lightsoff.txt";
-            File.ReadAllLines(path + name);
+            string room = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(room);
             InventroyUI();
+
         }
 
-        static void kamer5lightson()
+        static void Kamer5lightson()
         {
-            string path = "@Date/";
+            string path = @"Data/";
             string name = "kamer5lightson.txt";
-            File.ReadAllLines(path + name);
+            string room = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(room);
             InventroyUI();
+
         }
 
-        static void kamer6()
+        static void Kamer6()
         {
             string path = @"Data/";
             string name = "kamer6.txt";
-            File.ReadAllLines(path + name);
+            string room = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(room);
             InventroyUI();
+
         }
 
         static void pillow()
@@ -356,6 +530,15 @@ namespace Escape_room
         {
             string path = @"Data/";
             string name = "idandbadge.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+        }
+
+        static void closetOpen()
+        {
+            string path = @"Data/";
+            string name = "closetOpen.txt";
             string zoom = File.ReadAllText(path + name);
             Console.Clear();
             Console.Write(zoom);
