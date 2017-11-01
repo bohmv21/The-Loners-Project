@@ -28,8 +28,8 @@ namespace Escape_room
 
 
             Console.SetWindowSize(150, 40);
-            huis();
-            Intro();
+           // huis();
+           // Intro();
             Mainswitch();
         }
          
@@ -159,7 +159,7 @@ namespace Escape_room
             } while (x == 1);
 
         }
-
+         
         static void Kamer2Switch()
         {
             Kamer2();
