@@ -25,8 +25,10 @@ namespace Escape_room
             ListInventory.Add("your moms toy ", false);
 
             Console.SetWindowSize(150, 40);
-            //huis();
-            //Intro();
+            intro2();
+            Console.ReadLine();
+            huis();
+            Intro();
             Mainswitch();
         }
          
@@ -472,13 +474,29 @@ namespace Escape_room
             Console.Clear();
             Console.Write(zoom);
 
-            do
-            {
+            string IntroRules = "You wake up in a room in a mansion and you don't remember anything except your name (Elizabeth Albert)." + "\r\n" + "You must escape or else you're going to die." + "\r\n" + 
+   "Try to find the story behind this mansion." + "\r\n" + "Good luck!" + "\r\n" + "You will need it.";
+            
 
+            for (int i = 0; i < IntroRules.Length; i++)
+            {
+                Console.Write(IntroRules[i]);
+                Thread.Sleep(50);
             }
-            while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter));
+            Console.ReadLine();
+
 
         }
+
+        static void intro2()
+        {
+            string path = @"Data/";
+            string name = "titlescreen.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+        }
+
 
         static void Kamer1()
         {
@@ -520,6 +538,16 @@ namespace Escape_room
             Console.Write(room);
             InventroyUI();
 
+        }
+
+        static void kamer4secretdoor()
+        {
+            string path = @"Data/";
+            string name = "kamer4secretroom.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+            InventroyUI();
         }
 
         static void Kamer5lightsoff()
@@ -649,7 +677,9 @@ namespace Escape_room
                 Console.Write(KeyWordEnter[i]);
                 Thread.Sleep(50);
             }
+            Console.ReadLine();
         }
+        
 
         static void help()
         {
