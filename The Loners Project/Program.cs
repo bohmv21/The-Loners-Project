@@ -18,17 +18,17 @@ namespace Escape_room
         {
 
             ListInventory.Add("note ", false);
-            ListInventory.Add("old key ", false);
-            ListInventory.Add("rusty key ", false);
+            ListInventory.Add("old key ", true);
+            ListInventory.Add("rusty key ", true);
             ListInventory.Add("id ", false);
             ListInventory.Add("flashlight ", false);
             ListInventory.Add("your moms toy ", false);
 
             Console.SetWindowSize(150, 40);
-            intro2();
+            //intro2();
             Console.ReadLine();
-            huis();
-            Intro();
+            //huis();
+            //Intro();
             Mainswitch();
         }
          
@@ -105,7 +105,7 @@ namespace Escape_room
                         }
                         break;
                     case "search cabinet":
-                        note();
+                        OldKey();
                         foreach (KeyValuePair<string, bool> kvp in ListInventory.ToList())
                         {
                             if (kvp.Key == "old key ")
@@ -180,7 +180,7 @@ namespace Escape_room
 
                     case "back":
                         x = 0;
-                        Kamer1();
+                        Mainswitch();
                         break;
 
                     case "help":
@@ -330,13 +330,7 @@ namespace Escape_room
                 switch (Line.ToLower())
                 {
                     case "inspect chest":
-                        foreach (KeyValuePair<string, bool> kvp in ListInventory.ToList())
-                        {
-                            if (kvp.Key == "rusty key ")
-                            {
-                                ListInventory[kvp.Key] = true;
-                            }
-                        }
+                        ChestSwitch();
                         break;
 
                     case "inspect gravestone":
@@ -372,6 +366,70 @@ namespace Escape_room
                         Console.WriteLine("Please enter help to look at functions");
                         break;
 
+                }
+            } while (x == 1);
+        }
+
+        static void ChestSwitch()
+        {
+            ChestLock();
+            int x = 1;
+            int IDInspect = 0;
+            Console.Write("The Chest seems to be locked with a 3 digit code :");
+            do
+            {
+                string Line = Convert.ToString(Console.ReadLine());
+                switch (Line.ToLower())
+                {
+                    // All Inspect cases
+                    case "164":
+                        foreach (KeyValuePair<string, bool> kvp in ListInventory.ToList())
+                        {
+                            if (kvp.Key == "rusty key ")
+                            {
+                                ListInventory[kvp.Key] = true;
+                            }
+                        }
+                        break;
+                    case "use note":
+                        if (ListInventory["note "])
+                        {
+                            note();
+                        }
+                        break;
+                    case "use id":
+                        IDInspect = 1;
+                        if (ListInventory["id "])
+                        {
+                            id();
+                        }
+                        break;
+
+                    //Back Case
+                    case "back":
+                        if (IDInspect == 1)
+                        {
+                            IDInspect = 0;
+                            ChestLock();
+                        }
+                        else
+                        {
+                            x = 0;
+                            Kamer5Switch();
+                        }
+                        break;
+
+                    //Help case
+                    case "help":
+                        x = 0;
+                        help();
+                        break;
+
+                    //Default case
+                    default:
+                        Console.WriteLine("The code u entered is wrong please try again");
+                        Console.Write("Enter 3 Digit code :");
+                        break;
                 }
             } while (x == 1);
         }
@@ -497,7 +555,6 @@ namespace Escape_room
             Console.Write(zoom);
         }
 
-
         static void Kamer1()
         {
             string path = @"Data/";
@@ -602,6 +659,54 @@ namespace Escape_room
 
         }
 
+        static void Chest()
+        {
+            string path = @"Data/";
+            string name = "safe.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+
+        }
+        static void ChestLock()
+        {
+            string path = @"Data/";
+            string name = "lock.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+
+        }
+        static void OldKey()
+        {
+            string path = @"Data/";
+            string name = "oldkey.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+
+        }
+
+        static void RustyKey()
+        {
+            string path = @"Data/";
+            string name = "rustykey.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+
+        }
+
+        static void GoldenKey()
+        {
+            string path = @"Data/";
+            string name = "goldenkey.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+
+        }
+
         static void id()
         {
             string path = @"Data/";
@@ -620,8 +725,6 @@ namespace Escape_room
             Console.Write(zoom);
         }
        
-
-
         static void Intro()
         {
             Console.Clear();
@@ -680,7 +783,6 @@ namespace Escape_room
             Console.ReadLine();
         }
         
-
         static void help()
         {
             Console.Clear();
