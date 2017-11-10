@@ -12,14 +12,14 @@ namespace Escape_room
     class Program
     {
         public static SortedList<string, bool> ListInventory = new SortedList<string, bool>();
-
+        public static int SafeUnlocked = 0;
 
         static void Main(string[] args)
         {
 
             ListInventory.Add("note ", false);
-            ListInventory.Add("old key ", true);
-            ListInventory.Add("rusty key ", true);
+            ListInventory.Add("old key ", false);
+            ListInventory.Add("rusty key ", false);
             ListInventory.Add("id ", false);
             ListInventory.Add("flashlight ", false);
             ListInventory.Add("your moms toy ", false);
@@ -136,7 +136,14 @@ namespace Escape_room
 
         static void Kamer2Switch()
         {
-            Kamer2();
+            if (SafeUnlocked == 1)
+            {
+                kamer2secretdoor();
+            }
+            else
+            {
+                Kamer2();
+            }
             int x = 1;
             do
             {
@@ -165,7 +172,8 @@ namespace Escape_room
                         if(ListInventory["old key "])
                         {
                             Kamer4Switch();
-                        } else { Console.WriteLine("U need an old key to open this door"); }
+                        }
+                        else { Console.WriteLine("U need an old key to open this door"); }
                         break;
                     case "enter left door":
                         if(ListInventory["rusty key "])
@@ -175,7 +183,14 @@ namespace Escape_room
                         else { Console.WriteLine("U need a rusty key to open this door"); }
                         break;
                     case "enter hatch":
-                        Kamer3Switch();
+                        if (SafeUnlocked == 1)
+                        {
+                            Kamer3Switch();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Please enter help to look at functions");
+                        }
                         break;
 
                     case "back":
@@ -278,14 +293,34 @@ namespace Escape_room
 
         static void Kamer4Switch()
         {
-            Kamer4();
+            if(SafeUnlocked == 1)
+            {
+                kamer4secretdoor();
+            }
+            else
+            {
+                Kamer4();
+            }
             int x = 1;
             do
             {
                 string Line = Convert.ToString(Console.ReadLine());
                 switch (Line.ToLower())
                 {
-                    case "inspect pillow":
+                    case "inspect painting":
+                        SafeSwitch();
+                        break;
+
+                    case "inspect desk":
+                        Diary();
+                        if (SafeUnlocked == 1)
+                        {
+                            kamer4secretdoor();
+                        }
+                        else
+                        {
+                            Kamer4();
+                        }
                         break;
 
                     case "back":
@@ -309,13 +344,80 @@ namespace Escape_room
                             id();
                         }
                         break;
+                        
                     case "enter door":
+                        if (SafeUnlocked == 1)
+                        {
+                            Kamer5Switch();
+                        } else
+                        {
+                            Console.WriteLine("Please enter help to look at functions");
+                        }
                         break;
 
                     default:
                         Console.WriteLine("Please enter help to look at functions");
                         break;
 
+                }
+            } while (x == 1);
+        }
+
+        static void SafeSwitch()
+        {
+            Safe();
+            int x = 1;
+            int IDInspect = 0;
+            Console.WriteLine("The safe seems to be locked with a 4 digit code");
+            do
+            {
+                Console.Write("Enter 4 Digit code :");
+                string Line = Convert.ToString(Console.ReadLine());
+                switch (Line.ToLower())
+                {
+                    // All Inspect cases
+                    case "1910":
+                        SafeUnlocked = 1;
+                        break;
+
+                    case "use note":
+                        if (ListInventory["note "])
+                        {
+                            note();
+                        }
+                        break;
+                    case "use id":
+                        IDInspect = 1;
+                        if (ListInventory["id "])
+                        {
+                            id();
+                        }
+                        break;
+
+                    //Back Case
+                    case "back":
+                        if (IDInspect == 1)
+                        {
+                            IDInspect = 0;
+                            ChestLock();
+                        }
+                        else
+                        {
+                            x = 0;
+                            Kamer4Switch();
+                        }
+                        break;
+
+                    //Help case
+                    case "help":
+                        help();
+                        Safe();
+                        break;
+
+                    //Default case
+                    default:
+                        Console.WriteLine("The code u entered is wrong please try again");
+                        break;
                 }
             } while (x == 1);
         }
@@ -340,7 +442,7 @@ namespace Escape_room
 
                         case "back":
                         x = 0;
-                        Kamer2Switch();
+                        Kamer4Switch();
                         break;
 
                     case "help":
@@ -375,9 +477,10 @@ namespace Escape_room
             ChestLock();
             int x = 1;
             int IDInspect = 0;
-            Console.Write("The Chest seems to be locked with a 3 digit code :");
+            Console.WriteLine("The Chest seems to be locked with a 3 digit code");
             do
             {
+                Console.Write("Enter 3 Digit code :");
                 string Line = Convert.ToString(Console.ReadLine());
                 switch (Line.ToLower())
                 {
@@ -390,6 +493,7 @@ namespace Escape_room
                                 ListInventory[kvp.Key] = true;
                             }
                         }
+                        RustyKey();
                         break;
                     case "use note":
                         if (ListInventory["note "])
@@ -421,14 +525,13 @@ namespace Escape_room
 
                     //Help case
                     case "help":
-                        x = 0;
                         help();
+                        ChestLock();
                         break;
 
                     //Default case
                     default:
                         Console.WriteLine("The code u entered is wrong please try again");
-                        Console.Write("Enter 3 Digit code :");
                         break;
                 }
             } while (x == 1);
@@ -452,7 +555,7 @@ namespace Escape_room
 
                     case "help":
                         help();
-                        Kamer5lightsoff();
+                        gravestone();
                         break;
                     case "use note":
                         if (ListInventory["note "])
@@ -487,11 +590,6 @@ namespace Escape_room
                 string Line = Convert.ToString(Console.ReadLine());
                 switch (Line.ToLower())
                 {
-                    case "inspect pillow":
-                        pillow();
-                        Mainswitch2();
-                        break;
-
                     case "back":
                         x = 0;
                         Kamer2Switch();
@@ -514,6 +612,8 @@ namespace Escape_room
                         }
                         break;
                     case "enter door":
+                        Ending();
+                        Environment.Exit(0);
                         break;
 
                     default:
@@ -597,6 +697,16 @@ namespace Escape_room
 
         }
 
+        static void kamer2secretdoor()
+        {
+            string path = @"Data/";
+            string name = "kamer2secretroom.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+            InventroyUI();
+        }
+
         static void kamer4secretdoor()
         {
             string path = @"Data/";
@@ -649,6 +759,15 @@ namespace Escape_room
             Console.Write(zoom);
         }
 
+        static void Safe()
+        {
+            string path = @"Data/";
+            string name = "safe.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+        }
+
         static void body()
         {
             string path = @"Data/";
@@ -668,6 +787,7 @@ namespace Escape_room
             Console.Write(zoom);
 
         }
+
         static void ChestLock()
         {
             string path = @"Data/";
@@ -677,6 +797,7 @@ namespace Escape_room
             Console.Write(zoom);
 
         }
+
         static void OldKey()
         {
             string path = @"Data/";
@@ -714,6 +835,36 @@ namespace Escape_room
             string zoom = File.ReadAllText(path + name);
             Console.Clear();
             Console.Write(zoom);
+        }
+
+        static void Diary()
+        {
+            string path = @"Data/";
+            string name = "diary.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+
+            Console.WriteLine("Press 'ENTER' to continue");
+            do
+            {
+            }
+            while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter));
+        }
+
+        static void Ending()
+        {
+            string path = @"Data/";
+            string name = "ending.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+
+            Console.WriteLine("Press 'ENTER' to continue");
+            do
+            {
+            }
+            while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter));
         }
 
         static void closetOpen()

@@ -58,6 +58,12 @@
     <Content Include="Data\closetOpen.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\diary.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ending.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\goldenkey.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
