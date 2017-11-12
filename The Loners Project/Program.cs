@@ -19,17 +19,17 @@ namespace Escape_room
         static void Main(string[] args)
         {
             ListInventory.Add("note ", false);
-            ListInventory.Add("old key ", true);
+            ListInventory.Add("old key ", false);
             ListInventory.Add("golden key ", false);
-            ListInventory.Add("rusty key ", true);
+            ListInventory.Add("rusty key ", false);
             ListInventory.Add("id ", false);
             ListInventory.Add("flashlight ", false);
             ListInventory.Add("your moms toy ", false);
             ListInventory.Add("dairy ", false);
             Console.SetWindowSize(150, 40);
-            //intro2();
-            //huis();
-            //Intro();
+            intro2();
+            huis();
+            Intro();
             Mainswitch();
             
         }
@@ -279,7 +279,12 @@ namespace Escape_room
                         Kamer2Switch();
                         break;
                     case "inspect ghost":
-
+                        string IntroRules = "///////////////////////////////////////////////////////////////////////////////////////////////////////////" + "\r\n";
+                        for (int i = 0; i < IntroRules.Length; i++)
+                        {
+                            Console.Write(IntroRules[i]);
+                            Thread.Sleep(50);
+                        }
                         break;
 
                     case "help":
@@ -506,6 +511,8 @@ namespace Escape_room
                             }
                         }
                         RustyKey();
+                        Console.Beep();
+                        Kamer5Switch();
                         break;
                     case "use note":
                         if (ListInventory["note "])
