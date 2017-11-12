@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
 using System.Collections;
+using System.Media;
+using System.Runtime.InteropServices;
 
 namespace Escape_room
 {
@@ -16,20 +18,20 @@ namespace Escape_room
 
         static void Main(string[] args)
         {
-
             ListInventory.Add("note ", false);
-            ListInventory.Add("old key ", false);
-            ListInventory.Add("rusty key ", false);
+            ListInventory.Add("old key ", true);
+            ListInventory.Add("golden key ", false);
+            ListInventory.Add("rusty key ", true);
             ListInventory.Add("id ", false);
             ListInventory.Add("flashlight ", false);
             ListInventory.Add("your moms toy ", false);
-
+            ListInventory.Add("dairy ", false);
             Console.SetWindowSize(150, 40);
             //intro2();
-            Console.ReadLine();
             //huis();
             //Intro();
             Mainswitch();
+            
         }
          
 
@@ -185,7 +187,7 @@ namespace Escape_room
                     case "enter hatch":
                         if (SafeUnlocked == 1)
                         {
-                            Kamer3Switch();
+                            Kamer5Switch();
                         }
                         else
                         {
@@ -276,6 +278,9 @@ namespace Escape_room
                         x = 0;
                         Kamer2Switch();
                         break;
+                    case "inspect ghost":
+
+                        break;
 
                     case "help":
                         help();
@@ -348,7 +353,7 @@ namespace Escape_room
                     case "enter door":
                         if (SafeUnlocked == 1)
                         {
-                            Kamer5Switch();
+                            Kamer3Switch();
                         } else
                         {
                             Console.WriteLine("Please enter help to look at functions");
@@ -373,11 +378,18 @@ namespace Escape_room
             {
                 Console.Write("Enter 4 Digit code :");
                 string Line = Convert.ToString(Console.ReadLine());
-                switch (Line.ToLower())
+                switch(Line.ToLower())
                 {
                     // All Inspect cases
+
                     case "1910":
                         SafeUnlocked = 1;
+                        Console.Beep();
+                        x = 1;
+                        var sound = new System.Media.SoundPlayer();
+                        sound.SoundLocation = @"Data/door.wav";
+                        sound.PlaySync();
+                        Kamer4Switch();
                         break;
 
                     case "use note":
@@ -392,7 +404,7 @@ namespace Escape_room
                         {
                             id();
                         }
-                        break;
+                        break; 
 
                     //Back Case
                     case "back":
@@ -418,7 +430,7 @@ namespace Escape_room
                     default:
                         Console.WriteLine("The code u entered is wrong please try again");
                         break;
-                }
+                } 
             } while (x == 1);
         }
 
@@ -547,7 +559,6 @@ namespace Escape_room
                 switch (Line.ToLower())
                 {
                     
-
                     case "back":
                         x = 0;
                         Kamer5Switch();
@@ -612,8 +623,17 @@ namespace Escape_room
                         }
                         break;
                     case "enter door":
-                        Ending();
-                        Environment.Exit(0);
+                        if (ListInventory["golden key "])
+                        {
+                            Ending();
+                            Environment.Exit(0);
+                        }
+                        else
+                        {
+                            Console.WriteLine("You need a golden key to leave the building.");
+                        }
+                        break;
+
                         break;
 
                     default:
@@ -874,6 +894,9 @@ namespace Escape_room
             string zoom = File.ReadAllText(path + name);
             Console.Clear();
             Console.Write(zoom);
+            var sound = new System.Media.SoundPlayer();
+            sound.SoundLocation = @"Data/cabinet.wav";
+            sound.PlaySync();
         }
        
         static void Intro()
@@ -929,6 +952,13 @@ namespace Escape_room
             for (int i = 0; i < KeyWordEnter.Length; i++)
             {
                 Console.Write(KeyWordEnter[i]);
+                Thread.Sleep(50);
+            }
+
+            string KeyWordHelp = "To get items you first need to inspect them and then search them." + "\r\n";
+            for (int i = 0; i < KeyWordHelp.Length; i++)
+            {
+                Console.Write(KeyWordHelp[i]);
                 Thread.Sleep(50);
             }
             Console.ReadLine();
