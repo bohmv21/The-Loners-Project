@@ -9,33 +9,30 @@ using System.Collections;
 using System.Media;
 using System.Runtime.InteropServices;
 
-namespace Escape_room
+namespace Escape_Room
 {
     class Program
     {
         public static SortedList<string, bool> ListInventory = new SortedList<string, bool>();
         public static int SafeUnlocked = 0;
-
+        public static Thread TimerThread = new Thread(Clock.Time);
         static void Main(string[] args)
         {
-            ListInventory.Add("note ", false);
-            ListInventory.Add("old key ", false);
-            ListInventory.Add("golden key ", false);
-            ListInventory.Add("rusty key ", false);
-            ListInventory.Add("id ", false);
-            ListInventory.Add("flashlight ", false);
-            ListInventory.Add("your moms toy ", false);
-            ListInventory.Add("dairy ", false);
-            Console.SetWindowSize(150, 40);
+            ListInventory.Add("note, ", false);
+            ListInventory.Add("old key, ", false);
+            ListInventory.Add("golden key, ", false);
+            ListInventory.Add("rusty key, ", false);
+            ListInventory.Add("id, ", false);
+            ListInventory.Add("diary, ", false);
+            Console.SetWindowSize(150, 42);
             intro2();
             huis();
             Intro();
-            Mainswitch();
-            
+            Kamer1Switch();      
         }
          
 
-        static void Mainswitch()
+        static void Kamer1Switch()
         {
             Kamer1();
             int x = 1;
@@ -46,12 +43,12 @@ namespace Escape_room
                 {
                     case "inspect pillow":
                         pillow();
-                        Mainswitch2();
+                        Kamer1Switch2();
                         break;
 
                     case "inspect cabinet":
                         closetOpen();
-                        Mainswitch2();
+                        Kamer1Switch2();
                         break;
 
                     case "back":
@@ -60,21 +57,28 @@ namespace Escape_room
 
                     case "help":
                         help();
-                        Kamer1();
+                        Kamer1Switch();
                         break;
 
                     case "use note":
-                        if (ListInventory["note "])
+                        if (ListInventory["note, "])
                         {
                             note();
                         }
                         break;
                     case "use id":
-                        if (ListInventory["id "])
+                        if (ListInventory["id, "])
                         {
                            id();
                         }
                         break;
+                    case "use diary":
+                        if (ListInventory["diary, "])
+                        {
+                            Diary();
+                        }
+                        break;
+
                     case "enter door":
                         Kamer2Switch();
                         break;
@@ -87,7 +91,7 @@ namespace Escape_room
             } while (x == 1);
         }
 
-        static void Mainswitch2()
+        static void Kamer1Switch2()
         {
             int x = 1;
 
@@ -100,20 +104,43 @@ namespace Escape_room
                         note();
                         foreach (KeyValuePair<string, bool> kvp in ListInventory.ToList())
                         {
-                            if (kvp.Key == "note ")
+                            if (kvp.Key == "note, ")
                             {
                                 ListInventory[kvp.Key] = true;
                             }
                         }
+                        Thread.Sleep(1000);
+                        Kamer1Switch();
                         break;
                     case "search cabinet":
                         OldKey();
                         foreach (KeyValuePair<string, bool> kvp in ListInventory.ToList())
                         {
-                            if (kvp.Key == "old key ")
+                            if (kvp.Key == "old key, ")
                             {
                                 ListInventory[kvp.Key] = true;
                             }
+                        }
+                        Thread.Sleep(750);
+                        Kamer1Switch();
+                        break;
+
+                    case "use note":
+                        if (ListInventory["note, "])
+                        {
+                            note();
+                        }
+                        break;
+                    case "use id":
+                        if (ListInventory["id, "])
+                        {
+                            id();
+                        }
+                        break;
+                    case "use diary":
+                        if (ListInventory["diary, "])
+                        {
+                            Diary();
                         }
                         break;
 
@@ -124,7 +151,7 @@ namespace Escape_room
 
                     case "help":
                         help();
-                        Kamer1();
+                        Kamer1Switch();
                         break;
 
 
@@ -158,27 +185,33 @@ namespace Escape_room
                         break;
 
                     case "use note":
-                        if (ListInventory["note "])
+                        if (ListInventory["note, "])
                         {
                             note();
                         }
                         break;
                     case "use id":
-                        if (ListInventory["id "])
+                        if (ListInventory["id, "])
                         {
                             id();
                         }
                         break;
+                    case "use diary":
+                        if (ListInventory["diary, "])
+                        {
+                            Diary();
+                        }
+                        break;
 
                     case "enter right door":
-                        if(ListInventory["old key "])
+                        if(ListInventory["old key, "])
                         {
                             Kamer4Switch();
                         }
                         else { Console.WriteLine("U need an old key to open this door"); }
                         break;
                     case "enter left door":
-                        if(ListInventory["rusty key "])
+                        if(ListInventory["rusty key, "])
                         {
                             Kamer6Switch();
                         }
@@ -197,7 +230,7 @@ namespace Escape_room
 
                     case "back":
                         x = 0;
-                        Mainswitch();
+                        Kamer1Switch();
                         break;
 
                     case "help":
@@ -224,22 +257,41 @@ namespace Escape_room
                         id();
                         foreach (KeyValuePair<string, bool> kvp in ListInventory.ToList())
                         {
-                            if (kvp.Key == "id ")
+                            if (kvp.Key == "id, ")
                             {
                                 ListInventory[kvp.Key] = true;
                             }
                         }
                         break;
 
+                    case "use note":
+                        if (ListInventory["note, "])
+                        {
+                            note();
+                        }
+                        break;
+                    case "use id":
+                        if (ListInventory["id, "])
+                        {
+                            id();
+                        }
+                        break;
+                    case "use diary":
+                        if (ListInventory["diary, "])
+                        {
+                            Diary();
+                        }
+                        break;
+
                     case "back":
                         x = 0;
-                        Kamer2();
+                        Kamer2Switch();
                         break;
 
                     case "help":
                         x = 0;
                         help();
-                        Kamer2();
+                        Kamer2Switch();
                         break;
 
                     default:
@@ -258,33 +310,47 @@ namespace Escape_room
                 string Line = Convert.ToString(Console.ReadLine());
                 switch (Line.ToLower())
                 {
-                    case "inspect":
-                        break;
-
                     case "use note":
-                        if (ListInventory["note "])
+                        if (ListInventory["note, "])
                         {
                             note();
                         }
                         break;
                     case "use id":
-                        if (ListInventory["id "])
+                        if (ListInventory["id, "])
                         {
                             id();
+                        }
+                        break;
+                    case "use diary":
+                        if (ListInventory["diary, "])
+                        {
+                            Diary();
                         }
                         break;
 
                     case "back":
                         x = 0;
-                        Kamer2Switch();
+                        Kamer4Switch();
                         break;
                     case "inspect ghost":
-                        string IntroRules = "///////////////////////////////////////////////////////////////////////////////////////////////////////////" + "\r\n";
+                        Ghost();
+                        string IntroRules = "U will need this later" + "\r\n";
                         for (int i = 0; i < IntroRules.Length; i++)
                         {
                             Console.Write(IntroRules[i]);
                             Thread.Sleep(50);
                         }
+                        Thread.Sleep(500);
+                        GoldenKey();
+                        foreach (KeyValuePair<string, bool> kvp in ListInventory.ToList())
+                        {
+                            if (kvp.Key == "golden key, ")
+                            {
+                                ListInventory[kvp.Key] = true;
+                            }
+                        }
+                        Thread.Sleep(500);
                         break;
 
                     case "help":
@@ -323,14 +389,14 @@ namespace Escape_room
 
                     case "inspect desk":
                         Diary();
-                        if (SafeUnlocked == 1)
+                        foreach (KeyValuePair<string, bool> kvp in ListInventory.ToList())
                         {
-                            kamer4secretdoor();
+                            if (kvp.Key == "diary, ")
+                            {
+                                ListInventory[kvp.Key] = true;
+                            }
                         }
-                        else
-                        {
-                            Kamer4();
-                        }
+                        Thread.Sleep(3000);
                         break;
 
                     case "back":
@@ -342,19 +408,26 @@ namespace Escape_room
                         help();
                         Kamer4();
                         break;
+
                     case "use note":
-                        if (ListInventory["note "])
+                        if (ListInventory["note, "])
                         {
                             note();
                         }
                         break;
                     case "use id":
-                        if (ListInventory["id "])
+                        if (ListInventory["id, "])
                         {
                             id();
                         }
                         break;
-                        
+                    case "use diary":
+                        if (ListInventory["diary, "])
+                        {
+                            Diary();
+                        }
+                        break;
+
                     case "enter door":
                         if (SafeUnlocked == 1)
                         {
@@ -398,18 +471,23 @@ namespace Escape_room
                         break;
 
                     case "use note":
-                        if (ListInventory["note "])
+                        if (ListInventory["note, "])
                         {
                             note();
                         }
                         break;
                     case "use id":
-                        IDInspect = 1;
-                        if (ListInventory["id "])
+                        if (ListInventory["id, "])
                         {
                             id();
                         }
-                        break; 
+                        break;
+                    case "use diary":
+                        if (ListInventory["diary, "])
+                        {
+                            Diary();
+                        }
+                        break;
 
                     //Back Case
                     case "back":
@@ -425,13 +503,11 @@ namespace Escape_room
                         }
                         break;
 
-                    //Help case
                     case "help":
                         help();
                         Safe();
                         break;
 
-                    //Default case
                     default:
                         Console.WriteLine("The code u entered is wrong please try again");
                         break;
@@ -459,26 +535,31 @@ namespace Escape_room
 
                         case "back":
                         x = 0;
-                        Kamer4Switch();
+                        Kamer2Switch();
                         break;
 
                     case "help":
                         help();
                         Kamer5lightsoff();
                         break;
+
                     case "use note":
-                        if (ListInventory["note "])
+                        if (ListInventory["note, "])
                         {
                             note();
                         }
                         break;
                     case "use id":
-                        if (ListInventory["id "])
+                        if (ListInventory["id, "])
                         {
                             id();
                         }
                         break;
-                    case "enter door":
+                    case "use diary":
+                        if (ListInventory["diary, "])
+                        {
+                            Diary();
+                        }
                         break;
 
                     default:
@@ -505,26 +586,33 @@ namespace Escape_room
                     case "164":
                         foreach (KeyValuePair<string, bool> kvp in ListInventory.ToList())
                         {
-                            if (kvp.Key == "rusty key ")
+                            if (kvp.Key == "rusty key, ")
                             {
                                 ListInventory[kvp.Key] = true;
                             }
                         }
                         RustyKey();
                         Console.Beep();
+                        Thread.Sleep(500);
                         Kamer5Switch();
                         break;
+
                     case "use note":
-                        if (ListInventory["note "])
+                        if (ListInventory["note, "])
                         {
                             note();
                         }
                         break;
                     case "use id":
-                        IDInspect = 1;
-                        if (ListInventory["id "])
+                        if (ListInventory["id, "])
                         {
                             id();
+                        }
+                        break;
+                    case "use diary":
+                        if (ListInventory["diary, "])
+                        {
+                            Diary();
                         }
                         break;
 
@@ -575,19 +663,24 @@ namespace Escape_room
                         help();
                         gravestone();
                         break;
+
                     case "use note":
-                        if (ListInventory["note "])
+                        if (ListInventory["note, "])
                         {
                             note();
                         }
                         break;
                     case "use id":
-                        if (ListInventory["id "])
+                        if (ListInventory["id, "])
                         {
                             id();
                         }
                         break;
-                    case "enter door":
+                    case "use diary":
+                        if (ListInventory["diary, "])
+                        {
+                            Diary();
+                        }
                         break;
 
                     default:
@@ -617,20 +710,28 @@ namespace Escape_room
                         help();
                         Kamer6();
                         break;
+
                     case "use note":
-                        if (ListInventory["note "])
+                        if (ListInventory["note, "])
                         {
                             note();
                         }
                         break;
                     case "use id":
-                        if (ListInventory["id "])
+                        if (ListInventory["id, "])
                         {
                             id();
                         }
                         break;
+                    case "use diary":
+                        if (ListInventory["diary, "])
+                        {
+                            Diary();
+                        }
+                        break;
+
                     case "enter door":
-                        if (ListInventory["golden key "])
+                        if (ListInventory["golden key, "])
                         {
                             Ending();
                             Environment.Exit(0);
@@ -639,8 +740,6 @@ namespace Escape_room
                         {
                             Console.WriteLine("You need a golden key to leave the building.");
                         }
-                        break;
-
                         break;
 
                     default:
@@ -660,7 +759,7 @@ namespace Escape_room
             Console.Write(zoom);
 
             string IntroRules = "You wake up in a room in a mansion and you don't remember anything except your name (Elizabeth Albert)." + "\r\n" + "You must escape or else you're going to die." + "\r\n" + 
-   "Try to find the story behind this mansion." + "\r\n" + "Good luck!" + "\r\n" + "You will need it.";
+   "Try to find the story behind this mansion." + "\r\n" + "Good luck!" + "\r\n" + "You will need it." + "\r\n" + "Press ENTER to continue.";
             
 
             for (int i = 0; i < IntroRules.Length; i++)
@@ -668,8 +767,11 @@ namespace Escape_room
                 Console.Write(IntroRules[i]);
                 Thread.Sleep(50);
             }
-            Console.ReadLine();
 
+            do
+            {
+            }
+            while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter));
 
         }
 
@@ -799,6 +901,16 @@ namespace Escape_room
         {
             string path = @"Data/";
             string name = "pocket.txt";
+            string zoom = File.ReadAllText(path + name);
+            Console.Clear();
+            Console.Write(zoom);
+
+        }
+
+        static void Ghost()
+        {
+            string path = @"Data/";
+            string name = "ghost.txt";
             string zoom = File.ReadAllText(path + name);
             Console.Clear();
             Console.Write(zoom);
@@ -968,8 +1080,19 @@ namespace Escape_room
                 Console.Write(KeyWordHelp[i]);
                 Thread.Sleep(50);
             }
-            Console.ReadLine();
-        }
+
+            string KeyWordEnd = "Press ENTER to continue." + "\r\n";
+            for (int i = 0; i < KeyWordEnd.Length; i++)
+            {
+                Console.Write(KeyWordEnd[i]);
+                Thread.Sleep(50);
+            }
+            do
+            {
+            }
+            while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter));
+            TimerThread.Start();
+    }
         
         static void help()
         {
